@@ -1,29 +1,29 @@
-Drum Machine/Sample player for the Motivation Radio Eurorack module
+Drum Machine/Sample player sketch for the Motivation Radio Eurorack module
 
 Motivation Radio is a general purpose eurorack module based on the ESP32 with:
 
-4 Gate/Trigger inputs
+	4 Gate/Trigger inputs
 
-4 CV inputs -5V to +5V range, 12 bit resolution
+	4 CV inputs -5V to +5V range, 12 bit resolution
 
-4 Gate/Trigger outputs 0-6V
+	4 Gate/Trigger outputs 0-6V
 
-4 CV outputs 0-6.144V 12 bit resolution
+	4 CV outputs 0-6.144V 12 bit resolution
 
-128x32 OLED display
+	128x32 OLED display
 
-Encoder with button
+	Encoder with switch
 
-MIDI in and out with 1/8 jacks - MIDI in works with either polarity (Korg or Arturia), MIDI out is MMA standard (Korg)
+	MIDI in and out with 1/8 jacks - MIDI in works with either polarity (Korg or Arturia), MIDI out is MMA standard (Korg)
 
-Bluetooth and Wifi are supported by the ESP32 module
+	Bluetooth and Wifi are supported by the ESP32 module
 
 
-Motivation Radio is intended mainly for interfacing eurorack to other devices (e.g. iPad) wirelessly but it can do more.
+Motivation Radio is intended mainly for interfacing eurorack to other devices (e.g. iPad) wirelessly but it can do more!
 
 This example shows how to play audio samples at 22khz on one of the DAC outputs. 
 
-Gate inputs - sample triggers. sample can be selected in the menu. serial MIDI input can also trigger samples: sample 0=Note 35, sample 1=Note 36 etc. MIDI channel 10 default, can change in the menu.
+Gate inputs - sample triggers. sample can be selected in the menu. Serial MIDI input can also trigger samples: sample 0=Note 35, sample 1=Note 36 etc. MIDI channel 10 default, can change in the menu.
 
 CV inputs - selectable in the menu as volume (e.g. accent input), sample number, or no action
 
@@ -46,5 +46,7 @@ Clickencoder (included in the sketch library directory)
 
 compiled with Arduino 1.85 with ESP32 Arduino installed. Use "ESP32 DEV Module" as the board and "NO OTA (Large App)" as the partition scheme. This partition scheme has a limit of 2Mb for the app size. I think its possible to create a partition scheme to use most of the 4Mb of flash but I have not tried it. 
 
-R Heslip Feb 2019
+More info in the Wiki: https://github.com/rheslip/Motivation-Radio-Drum-Machine/wiki
+
+Rich Heslip Feb 2019
 
