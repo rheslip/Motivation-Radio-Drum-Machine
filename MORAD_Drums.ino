@@ -30,6 +30,7 @@
 // plays samples in response to gate/trigger inputs and MIDI note on messages
 // will play any 22khz sample file converted to a header file in the appropriate format
 // Feb 3/19 - initial version
+// Feb 11/19 - sped up encoder/trigger ISR so it will catch 1ms pulses from Grids
 
 #include <Arduino.h> 
 
@@ -74,7 +75,7 @@ ClickEncoderStream encStream(clickEncoder,1);
   
 // sample interrupt timer defs
 #define DAC_TIMER_MICROS 46  // 22khz interrupt rate for DAC
-#define ENC_TIMER_MICROS 1000 // 1khz for encoder
+#define ENC_TIMER_MICROS 250 // 4khz for encoder
 hw_timer_t * timer0 = NULL;
 hw_timer_t * timer1 = NULL;
 
@@ -122,9 +123,9 @@ struct voice_t {
 //#include "GMsamples/samples.h"  // general MIDI set - do not run wav2header on these or it will mess up the midi mapping
 // #include "808samples/samples.h" // 808 sounds
 //#include "PNSsamples/samples.h"   // PNS soundfont set
-// #include "Angular_Jungle_Set/samples.h"   // Jungle soundfont set - great!
+#include "Angular_Jungle_Set/samples.h"   // Jungle soundfont set - great!
 //#include "WSA1_DRUMKIT/samples.h"   // WSA1 soundfont set
-#include "Angular_Techno_Set/samples.h"   // Techno
+//#include "Angular_Techno_Set/samples.h"   // Techno
 
 #define NUM_SAMPLES (sizeof(sample)/sizeof(sample_t))
 
@@ -221,7 +222,8 @@ void ICACHE_RAM_ATTR encTimer(){
           case NONE:
             break;
           case VOLUME:
-            volume_toplay=(voice[i].mix*CV_in[i]/ADC_RANGE); // set play volume from mix level and CV in
+            //volume_toplay=(voice[i].mix*CV_in[i]*CV_in[i]/(ADC_RANGE*ADC_RANGE)); // set play volume from mix level and CV in - square law response gives more punch
+            volume_toplay=(voice[i].mix*CV_in[i]/ADC_RANGE*ADC_RANGE); // set play volume from mix level and CV in 
             break;
           case SAMPLE:
             offset=CV_in[i]*NUM_SAMPLES/ADC_RANGE+NUM_SAMPLES/2+1;  // 0V in = sample selected in menu
