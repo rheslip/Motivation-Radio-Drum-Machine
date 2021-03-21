@@ -66,8 +66,10 @@ HardwareSerial MIDISerial(2);
 MIDI_CREATE_CUSTOM_INSTANCE(HardwareSerial, MIDISerial, MIDI, SerialMIDISettings);
 
 // create OLED display device
+#define SCREEN_WIDTH 128 // OLED display width, in pixels
+#define SCREEN_HEIGHT 32 // OLED display height, in pixels
 #define OLED_RESET -1  // unused port - to keep the compiler happy
-Adafruit_SSD1306 display(OLED_RESET);
+Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
 
 // encoder 
 ClickEncoder clickEncoder(ENC_A,ENC_B,ENC_SW,4); // divide by 4 works best with my encoder
