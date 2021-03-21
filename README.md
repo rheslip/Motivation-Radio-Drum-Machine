@@ -45,6 +45,8 @@ This example shows how to play audio samples at 22khz on one of the DAC outputs.
 
 * Clickencoder (included in the sketch library directory)
 
+* MIDI Library https://github.com/FortySevenEffects/arduino_midi_library
+
 "wav2header" utility is included which will auto generate the required header files from 22 or 44khz .wav files. see resources/readme.md
 
 Compiled with Arduino 1.85 with ESP32 Arduino installed. Use "ESP32 DEV Module" as the board and "NO OTA (Large App)" as the partition scheme. This partition scheme has a limit of 2Mb for the app size. I think its possible to create a partition scheme to use most of the 4Mb of flash but I have not tried it. 
